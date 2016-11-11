@@ -17,16 +17,27 @@ module Shuriken
         return [404,
                 {'Content-Type' => 'text/html'}, []]
       end
-      # klass, act = get_controller_and_action(env)
-      # controller = klass.new(env)
-      # text = controller.send(act)
-      # r = controller.get_response
-      # if r
-      #   [r.status, r.headers, [r.body].flatten]
-      # else
-        [200, {'Content-Type' => 'text/html'},
-         [text]]
-      # end
+      routes = RouterMapper.get_action_and_controller(env['PATH_INFO'], env)
+
+      if routes.length == 0
+        return [404,
+                {'Content-Type' => 'text/html'}, []]
+      else
+        route = routes.first
+        #获取controller 以及action
+        klass, act =Object.const_get(route.controller), route.action
+        controller = klass.new(env)
+        text = controller.send(act)
+        r = controller.get_response
+        if r
+          [r.status, r.headers, [r.body].flatten]
+        else
+          [200, {'Content-Type' => 'text/html'},
+           [text]]
+        end
+
+      end
+
     end
 
 

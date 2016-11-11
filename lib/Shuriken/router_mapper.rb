@@ -1,38 +1,23 @@
-require 'Shuriken/route'
+require 'Shuriken/router'
 module Shuriken
   class RouterMapper
-    #add restful 7 rules
-    def initialize
-      @routers = Router.new.routes
-      @resource_routes = %w{resource_name/:id  resource_name resource_name/edit resource_name/new}
-    end
-
-
-    def resources(name,&block)
-      @resource_routes.each do |r|
-        r.gsub!("resource_name",name.to_s)
-        route = Route.new()
-        route.action = r
-        p Router.new.routes
-        # @routers.push(route)
+    def self.get_action_and_controller(url, env)
+      routes = []
+      Router.new.routes.each do |route|
+        p route
+        route_url_regex = route.url
+        if route_url_regex == url
+            return route
+        end
+        route_url_regex.scan(/{([^:]+)\s*:\s*(.+?)(?<!\\)}/).each do |match|
+          route_url_regex.gsub!("{#{match.join(":")}}", match[1])
+        end
+        reg = Regexp.new(route_url_regex)
+        if (url =~ reg) == 0 && url.split('/').length == route.url.split('/').length && route.method.to_s.upcase == env['REQUEST_METHOD']
+          routes.push(route)
+        end
       end
-
-      puts Router.new.routes
-      instance_eval &block if block_given?
+      return routes
     end
-
-    def get
-
-    end
-
-
-    def post
-
-    end
-
-
-
   end
-
-
 end

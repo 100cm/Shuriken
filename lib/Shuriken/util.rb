@@ -6,4 +6,7 @@ module Shuriken
         tr("-", "_").
         downcase
   end
+
 end
+
+
