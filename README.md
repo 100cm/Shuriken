@@ -2,7 +2,7 @@
 
 ## introduce
 
-Rebuild yourself's like this! 
+Rebuild yourself's Rails like this! 
 
 
 ## Installation
@@ -23,7 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+you can see demo here [Shuriken-demo](https://github.com/icepoint0/shuriken-demo)
 
 ## Development
 
