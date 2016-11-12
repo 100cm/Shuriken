@@ -1,5 +1,5 @@
-require "Shuriken/version"
-require "Shuriken/routing"
+require 'Shuriken/version'
+require 'Shuriken/routing'
 require 'Shuriken/loader'
 require 'Shuriken/util'
 require 'Shuriken/controller'
@@ -25,7 +25,6 @@ module Shuriken
       else
         route = routes.first
         klass, act =Object.const_get(route.controller), route.action
-        p klass
         controller = klass.new(env)
         text = controller.send(act)
         r = controller.get_response

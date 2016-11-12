@@ -84,7 +84,6 @@ module Shuriken
       end
       if @resource == ''
         scaner = url+'/'
-        p scaner
         scaner.scan(/:([^\/]*)\//).each do |x|
           url.gsub!(":#{x[0]}",'{'+x[0]+':(.*)}')
         end
@@ -148,48 +147,4 @@ module Shuriken
 
   end
 end
-
-
-# str = '/api/{name:(.*)}/{id:[\dA-f]+}'
-# reg_str = '/api/{name:(.*)}/{id:[\dA-f]+}'
-# p str.split('/')
-# str.scan(/{([^:]+)\s*:\s*(.+?)(?<!\\)}/).each do |match|
-#   str.gsub!("{#{match.join(":")}}",match[1])
-# end
-# reg = Regexp.new(str)
-# p reg
-# p api = "/api/hello/323"
-#
-# params = {}
-# if (api =~ reg) == 0
-#   reg_str.split('/').each_with_index do |rs,index|
-#     name = rs.scan(/{([^:]+)\s*:\s*(.+?)(?<!\\)}/)
-#     p name
-#     if name.length == 1
-#       v = name[0][0]
-#       p v
-#       params.merge!({"#{v}": api.split('/')[index]})
-#     end
-#   end
-#   p params
-# end
-
-
-# p '{name:(.*)}'.scan(/{([^:]+)\s*:\s*(.+?)(?<!\\)}/)[0][0]
-
-# Shuriken::Router.new.draw do
-#
-#   resources :users do
-#
-#   end
-#
-#
-#
-# end
-#
-#
-#  Shuriken::Router.new.routes.each do |r|
-#   p r.url
-# end
-#
 
