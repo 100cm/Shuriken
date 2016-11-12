@@ -24,8 +24,8 @@ module Shuriken
                 {'Content-Type' => 'text/html'}, []]
       else
         route = routes.first
-        #获取controller 以及action
         klass, act =Object.const_get(route.controller), route.action
+        p klass
         controller = klass.new(env)
         text = controller.send(act)
         r = controller.get_response

@@ -104,6 +104,8 @@ module Shuriken
 
       controller, action = handle.split("#")
 
+      controller = "#{controller.capitalize}Controller" if @resource == ''
+
       route = Route.new(action: action, url: url, method: :get, controller: controller,namespace: namespaces)
       Router.new.routes.push(route)
 

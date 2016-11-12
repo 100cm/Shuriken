@@ -4,7 +4,7 @@ module Shuriken
     def self.get_action_and_controller(url, env)
       routes = []
       Router.new.routes.each do |route|
-        p route
+        p route.namespace
         route_url_regex = route.url
         if route_url_regex == url
             return route
